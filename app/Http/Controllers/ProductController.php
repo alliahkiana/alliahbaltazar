@@ -30,8 +30,9 @@ class ProductController extends Controller
 
         $data = [
             'products' => $productService->listProducts(),
-            'tasks' => $this->taskService->getAllTasks()
-
+            'tasks' => $this->taskService->getAllTasks(),
+            'sharedVariable' => 'This is a shared global variable',
+            'productKey' => 'abc123'
         ];
         return view('products.index', $data);
     }
@@ -50,7 +51,9 @@ class ProductController extends Controller
 
         $data = [
             'products' => $productService->listProducts(),
-            'tasks' => $this->taskService->getAllTasks()
+            'tasks' => $this->taskService->getAllTasks(),
+            'sharedVariable' => 'This is a shared global variable',
+            'productKey' => 'abc123'
         ];
         return view('products.list', $data);
     }
