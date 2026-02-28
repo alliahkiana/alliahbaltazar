@@ -1,14 +1,16 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Services\ProductService;
 use Illuminate\Support\Facades\Response;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['name' => 'funtilon-app']);
 });
 
 Route::get('show-users', [\App\Http\Controllers\UserController::class, 'show']);
@@ -81,4 +83,13 @@ Route::post('/token', function (Request $request) {
         'term' => $request->input('term'),
         'token' => $request->input('_token')
     ]);
+});
+
+Route::get('/user', [UserController::class, 'index'])->middleware('user-middleware');
+
+Route::resource('products', ProductController::class);
+
+Route::get('/product-list', function (ProductService $productService) {
+    $data['products'] = $productService->listProducts();
+    return view('product-list', $data);
 });
