@@ -93,3 +93,5 @@ Route::get('/product-list', function (ProductService $productService) {
     $data['products'] = $productService->listProducts();
     return view('product-list', $data);
 });
+
+Route::get('/products-list', [ProductController::class, 'listProducts']);

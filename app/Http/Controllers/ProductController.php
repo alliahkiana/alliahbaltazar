@@ -36,6 +36,25 @@ class ProductController extends Controller
         return view('products.index', $data);
     }
 
+    public function listProducts(ProductService $productService)
+    {
+        $newProduct = [
+            'id' => 4,
+            'name' => 'Tomato',
+            'category' => 'Vegetables'
+        ];
+        $productService->insert($newProduct);
+
+        $this->taskService->add('Add to cart');
+        $this->taskService->add('Checkout');
+
+        $data = [
+            'products' => $productService->listProducts(),
+            'tasks' => $this->taskService->getAllTasks()
+        ];
+        return view('products.list', $data);
+    }
+ 
 
     public function show(ProductService $productService, string $id ) 
     { 

@@ -20,3 +20,15 @@
     </table>
 </div>
 
+<h1>Tasks</h1>
+<ul>
+    @foreach($tasks as $task)
+        <li>{{ $task }}</li>
+    @endforeach
+</ul>
+
+<p><strong>Global Variables:</strong></p>
+<p>{{ $sharedVariable }}</p>
+
+<p><strong>Product Key:</strong> {{ $productKey }}</p>
+
