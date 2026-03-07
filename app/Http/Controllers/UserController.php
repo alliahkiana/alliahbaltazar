@@ -2,42 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\UserService;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
+    protected $userService;
+
+    // Inject UserService via constructor
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    // Return all users as JSON
     public function show()
     {
-        $users = [
-            [
-                'name' => 'John Doe',
-                'gender' => 'Male'
-            ],
-            [
-                'name' => 'Jane Doe',
-                'gender' => 'Female'
-            ]
-        ];
-        return response()->json($users);
+        return response()->json($this->userService->listUsers());
     }
 
-    public function index(UserService $userService)
+    // Display users in a view
+    public function index()
     {
-        return $userService->listUsers();
+        $users = $this->userService->listUsers();
+        return view('users.index', ['users' => $users]);
     }
 
-    public function first(UserService $userService)
+    // Get the first user
+    public function first()
     {
-        return collect($userService->listUsers())->first();
+        return collect($this->userService->listUsers())->first();
     }
 
-    public function get(UserService $userService, $id)
+    // Get a user by ID
+    public function get($id)
     {
-        $user = collect($userService->listUsers())->filter(function ($item) use ($id) {
-            return $item['id'] == $id;
-        })->first();
+        $user = collect($this->userService->listUsers())
+            ->firstWhere('id', $id);
 
-        return $user;
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        return response()->json($user);
     }
 }

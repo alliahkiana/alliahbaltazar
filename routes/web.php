@@ -27,7 +27,9 @@ Route::get('/test-provider', function (UserService $userService) {
 });
 
 //service Provider
-Route::get('/test-users', [UserController::class, 'index']);
+Route::get('/test-users', function (UserService $userService) {
+    return $userService->listUsers();
+});
 
 // Facades
 Route::get('test-facade', function (UserService $userService) {
@@ -85,7 +87,7 @@ Route::post('/token', function (Request $request) {
     ]);
 });
 
-Route::get('/user', [UserController::class, 'index'])->middleware('user-middleware');
+Route::get('/users', [UserController::class, 'show']);
 
 Route::resource('products', ProductController::class);
 

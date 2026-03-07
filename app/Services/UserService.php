@@ -5,13 +5,12 @@ class UserService
 {
     protected $users;
 
-    public function __construct($users)
-    {
+    public function __construct($users) {
         $this->users = $users;
     }
 
-    public function listUsers()
-    {
+    public function listUsers()  {
         return $this->users;
     }
-}   
+
+}
