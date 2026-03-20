@@ -87,7 +87,7 @@ Route::post('/token', function (Request $request) {
     ]);
 });
 
-Route::get('/users', [UserController::class, 'show']);
+Route::get('/users', [UserController::class, 'index']);
 
 Route::resource('products', ProductController::class);
 

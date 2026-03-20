@@ -1,6 +1,8 @@
-<div class="container">
-    <h1>Products</h1>
-    <table class="table table-striped">
+<x-layout>
+<x-slot:heading>
+    Product List
+</x-slot:>
+<x-table>
         <thead>
             <tr>
                 <th>ID</th>
@@ -17,17 +19,5 @@
                 </tr>
             @endforeach
         </tbody>
-    </table>
-</div>
-
-<h1>Tasks</h1>
-<ul>
-    @foreach($tasks as $task)
-        <li>{{ $task }}</li>
-    @endforeach
-</ul>
-
-<p><strong>Global Variables:</strong></p>
-<p>{{ $sharedVariable }}</p>
-
-<p><strong>Product Key:</strong> {{ $productKey }}</p>
+    </x-table>
+</x-layout>

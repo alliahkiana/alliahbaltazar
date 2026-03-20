@@ -12,8 +12,8 @@ class UserServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
-        $this->app->singleton(UserService::class, function($app){
+        // Register the UserService as a singleton
+        $this->app->singleton(UserService::class, function ($app) {
             $users = [
                 [
                     'id' => 1,
@@ -26,9 +26,9 @@ class UserServiceProvider extends ServiceProvider
                     'gender' => 'Female'
                 ]
             ];
+
             return new UserService($users);
         });
-        
     }
 
     /**
@@ -36,6 +36,6 @@ class UserServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // You can leave this empty if nothing needs booting
     }
 }
